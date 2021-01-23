@@ -2,7 +2,6 @@ package com.github.guiguat.wordlist;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Permutation{
     private String prefix = "";
@@ -26,7 +25,7 @@ public class Permutation{
     }
     private void permute(String prefix, String str){
         int length = str.length();
-        if (length == 0) System.out.println(prefix);
+        if (length == 0) System.out.print(prefix);
         else {
             for (int i = 0; i < length; i++)
                 permute(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, length));
@@ -35,7 +34,7 @@ public class Permutation{
 
     private void permuteParallel(String prefix, String str){
         int length = str.length();
-        if (length == 0) System.out.println(prefix);
+        if (length == 0) System.out.print(prefix);
         else {
             for (int i = 0; i < length; i++) {
                 int finalI = i;
@@ -50,8 +49,7 @@ public class Permutation{
         permuteParallel(this.prefix, this.str);
         this.executor.shutdown();
         while(true){
-            if(this.executor.isTerminated()) break;
+            if(this.executor.isTerminated()) return;
         }
-
     }
 }
